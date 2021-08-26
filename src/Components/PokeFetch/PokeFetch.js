@@ -52,8 +52,9 @@ class PokeFetch extends Component {
       return (
         <div className={'wrapper'}>
           <button className={'start'} onClick={() => {
-            this.fetchPokemon();
             this.timer()
+            this.fetchPokemon();
+            this.state.count = 10;
           }}>Start!</button>
           <h1 className={'timer'} >{count}</h1>
           <div className={'pokeWrap'}>
@@ -66,8 +67,8 @@ class PokeFetch extends Component {
       return (
         <div className={'wrapper'}>
           <button className={'start'} onClick={() => {
-            this.fetchPokemon();
             this.timer()
+            this.fetchPokemon();
           }}>Start!</button>
           <h1 className={'timer'} >{count}</h1>
           <div className={'pokeWrap'}>
