@@ -13,7 +13,6 @@ class PokeFetch extends Component {
     }
   }
 
-  //either need to add timer method inside fetchPokemon or have separate method that is also called by onClick() for start button
   fetchPokemon() {
     let min = Math.ceil(1);
     let max = Math.floor(152);
@@ -30,10 +29,23 @@ class PokeFetch extends Component {
       })
       .catch((err) => console.log(err))
   }
-
   
-  //use ternary to keep pokeName transparent until timer === 0 and ternary to keep pokeImg dark until timer === 0,
-  //could use same ternary for both until want to slowly lighten the pokeImg, MVP right??
+  timer() {
+    this.myInterval = setInterval(() => {
+      this.setState(prevState => ({
+        count: prevState.count - 1
+      }))
+      
+      if (this.state.count === 0) {
+        clearInterval(this.myInterval)
+      } else if (this.state.count < 0) {
+        this.setState({ count: 10 }, () => {
+          console.log("Count updated" + " " + this.state.count)
+        })
+      }
+    }, 1000)
+  }
+
   render() {
     const { count } = this.state;
     if (count === 0) {
@@ -66,25 +78,6 @@ class PokeFetch extends Component {
       )
     }
   }
-
-  timer() {
-    this.myInterval = setInterval(() => {
-      this.setState(prevState => ({
-        count: prevState.count - 1
-      }))
-      
-      if (this.state.count === 0) {
-        clearInterval(this.myInterval)
-      } else if (this.state.count < 0) {
-        this.setState({ count: 10 }, () => {
-          console.log("Count updated" + " " + this.state.count)
-        })
-      }
-    }, 1000)
-  
-    
-  }
-
 }
 
 export default PokeFetch;
